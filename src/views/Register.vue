@@ -42,6 +42,7 @@ import { useRouter } from 'vue-router';
   const email = ref('')
   const password = ref('')
   const router = useRouter()
+  const errMsg = ref()
 
   const register= () => {
     // need .value because of ref()
@@ -52,8 +53,23 @@ import { useRouter } from 'vue-router';
         router.push('/feed')
       })
       .catch((error) => {
-        console.log(error.code)
-        alert(error.message)
+        switch (error.code) {
+          case "auth/invalid-email":
+            errMsg.value = "Invalid email"
+          break
+          case "auth/wrong-password":
+            errMsg.value = "Incorrect password"
+          break
+          case "auth/email-already-in-use":
+            errMsg.value = "Email already in use"
+          break
+          case "auth/weak-password":
+            errMsg.value = "Password is weak"
+          break
+          default:
+            errMsg.value = error.code
+          break
+        }
       })
   }
 
