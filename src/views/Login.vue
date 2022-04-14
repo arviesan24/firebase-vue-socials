@@ -1,22 +1,28 @@
 <template>
-  <main>
-    <h1>Sign In</h1>
-    <input-text
-      label="Email"
-      :modelValue="email"
-      @update:modelValue="email = $event"
-    />
-    <input-password
-      label="Password"
-      :modelValue="password"
-      @update:modelValue="password = $event"
-    />
-    <p v-if="errMsg" class="text-danger">{{ errMsg }}</p>
-  </main>
-    <button-primary
-      label="Login"
-      @click="login()"
-    />
+  <div class="card"  style="width: 50%;">
+    <div class="card-header text-center">
+      <h1>Sign In</h1>
+    </div>
+    <div class="card-body ">
+      <input-text
+        label="Email"
+        :modelValue="email"
+        @update:modelValue="email = $event"
+      />
+      <input-password
+        label="Password"
+        :modelValue="password"
+        @update:modelValue="password = $event"
+      />
+      <p v-if="errMsg" class="text-danger">{{ errMsg }}</p>
+    </div>
+    <div class="card-footer text-muted  text-center">
+      <button-primary
+        label="Login"
+        @click="login()"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -60,9 +66,11 @@
         }
       })
   }
-
-  const signInWithGoogle = () => {
-
-  }
-
 </script>
+
+<style scoped>
+.card {
+  margin: 0 auto;
+  float: none;
+}
+</style>
