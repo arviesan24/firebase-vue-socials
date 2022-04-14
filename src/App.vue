@@ -1,15 +1,28 @@
 <template>
-  <nav>
-    <router-link to="/login">Login</router-link> | 
-    <router-link to="/register">Register</router-link> | 
-    <router-link to="/feed">Feeds</router-link> | 
-    <button-warning
-      label="Logout"
-      @click="logout()"
-      v-if="isLoggedIn"
-    />
-  </nav>
-  <RouterView />
+  <main>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <router-link class="navbar-brand" to="/">Socials</router-link>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/login" v-if="!isLoggedIn">Login</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/register" v-if="!isLoggedIn">Register</router-link>
+          </li>
+        </ul>
+      <button-warning
+        label="Logout"
+        @click="logout()"
+        v-if="isLoggedIn"
+      />
+      </div>
+    </nav>
+    <RouterView />
+  </main>
 </template>
 
 
@@ -40,67 +53,3 @@
     })
   }
 </script>
-
-<style>
-@import '@/assets/base.css';
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
-}
-
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-}
-</style>
