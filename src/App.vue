@@ -1,24 +1,28 @@
 <template>
   <main>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <router-link class="navbar-brand" to="/">Socials</router-link>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <router-link class="nav-link" to="/login" v-if="!isLoggedIn">Login</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/register" v-if="!isLoggedIn">Register</router-link>
-          </li>
-        </ul>
-      <button-warning
-        label="Logout"
-        @click="logout()"
-        v-if="isLoggedIn"
-      />
+      <div class="container-fluid">
+        <router-link class="navbar-brand" to="/">Socials</router-link>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/login" v-if="!isLoggedIn">Login</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/register" v-if="!isLoggedIn">Register</router-link>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <button-warning
+              label="Logout"
+              @click="logout()"
+              v-if="isLoggedIn"
+            />
+          </form>
+        </div>
       </div>
     </nav>
     <RouterView />
