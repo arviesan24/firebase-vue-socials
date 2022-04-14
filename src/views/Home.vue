@@ -1,7 +1,7 @@
 <template>
-  <main>
-    You're at home
-  </main>
+  <div class="card border-light">
+    <img src="../assets/welcome.jpg" />
+  </div>
 </template>
 
 <script setup>
