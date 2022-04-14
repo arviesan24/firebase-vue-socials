@@ -1,21 +1,31 @@
 <template>
-  <main>
-    <h1>Create an Account</h1>
-    <input-text
-      label="Email"
-      :modelValue="email"
-      @update:modelValue="email = $event"
-    />
-    <input-password
-      label="Password"
-      :modelValue="password"
-      @update:modelValue="password = $event"
-    />
-    <button-primary
-      label="Register"
-      @click="register()"
-    />
-  </main>
+  <div class="card"  style="width: 50%;">
+    <div class="card-header text-center">
+      <h1>Create an Account</h1>
+    </div>
+    <div class="card-body ">
+      <input-text
+        label="Email"
+        :modelValue="email"
+        @update:modelValue="email = $event"
+      />
+      <input-password
+        label="Password"
+        :modelValue="password"
+        @update:modelValue="password = $event"
+      />
+      <div v-if="errMsg" class="alert alert-danger mt-3" role="alert">
+        {{ errMsg }}
+      </div>
+    </div>
+    <div class="card-footer text-muted  text-center">
+      <button-primary
+        label="Register"
+        @click="register()"
+        class="m-1"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -48,3 +58,10 @@ import { useRouter } from 'vue-router';
   }
 
 </script>
+
+<style scoped>
+.card {
+  margin: 0 auto;
+  float: none;
+}
+</style>
