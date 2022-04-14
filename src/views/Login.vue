@@ -14,12 +14,15 @@
         :modelValue="password"
         @update:modelValue="password = $event"
       />
-      <p v-if="errMsg" class="text-danger">{{ errMsg }}</p>
+      <div v-if="errMsg" class="alert alert-danger mt-3" role="alert">
+        {{ errMsg }}
+      </div>
     </div>
-    <div class="card-footer text-muted  text-center m-1">
+    <div class="card-footer text-muted  text-center">
       <button-primary
         label="Login"
         @click="login()"
+        class="m-1"
       />
       <button class="btn btn-lg btn-outline-dark m-1" @click="signInWithGoogle()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
