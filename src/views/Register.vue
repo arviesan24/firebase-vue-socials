@@ -14,6 +14,11 @@
         :modelValue="password"
         @update:modelValue="password = $event"
       />
+      <input-password
+        label="Confirm Password"
+        :modelValue="password2"
+        @update:modelValue="password2 = $event"
+      />
       <div v-if="errMsg" class="alert alert-danger mt-3" role="alert">
         {{ errMsg }}
       </div>
@@ -37,15 +42,22 @@
   import InputText from '../components/InputText.vue';
   import InputPassword from '../components/InputPassword.vue';
   import ButtonPrimary from '../components/ButtonPrimary.vue';
-import { useRouter } from 'vue-router';
+  import { useRouter } from 'vue-router';
 
   const email = ref('')
   const password = ref('')
+  const password2 = ref('')
   const router = useRouter()
   const errMsg = ref()
 
   const register= () => {
     // need .value because of ref()
+    if (password.value!==password2.value) {
+      errMsg.value = "Password didn't match please re-enter"
+      password.value = ''
+      password2.value = ''
+      return
+    }
     createUserWithEmailAndPassword(getAuth(), email.value, password.value)
       .then((result) => {
         console.log("Registration successful.")
