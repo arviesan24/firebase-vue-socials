@@ -14,7 +14,7 @@ import { getAnalytics } from "firebase/analytics";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG)
+const firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG)
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
