@@ -15,13 +15,25 @@
               <router-link class="nav-link" to="/register" v-if="!isLoggedIn">Register</router-link>
             </li>
           </ul>
-          <form class="d-flex">
+          <div class="container-fluid m-1" v-if="isLoggedIn">
+            <div class="input-group">
+              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-warning" type="submit">Search</button>
+            </div>
+          </div>
+          <div class="d-flex">
+            <router-link class="btn btn-sm btn-outline-success m-1" to="/profile" v-if="isLoggedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 16 16">
+                <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z"/>
+              </svg>
+            </router-link>
             <button-warning
               label="Logout"
               @click="logout()"
               v-if="isLoggedIn"
+              class="btn-sm m-1"
             />
-          </form>
+          </div>
         </div>
       </div>
     </nav>
