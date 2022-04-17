@@ -5,6 +5,7 @@ import Feed from '../views/Feed.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import Register from '../views/Register.vue'
+import SearchResults from '../views/SearchResults.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +37,14 @@ const router = createRouter({
       path: '/feed',
       name: 'feed',
       component: Feed,
+      meta: {
+        requiresAuth: true,
+      }
+    },
+    {
+      path: '/search-result',
+      name: 'searchResult',
+      component: SearchResults,
       meta: {
         requiresAuth: true,
       }

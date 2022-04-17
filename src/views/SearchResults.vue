@@ -9,11 +9,27 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { storeToRefs } from 'pinia';
   import { useUserStore } from '../stores/user';
+  import { getDatabase, ref as fbRef, query, orderByChild } from "firebase/database";
+  import { getAuth } from "firebase/auth";
+
 
   const { getemailSearch } = storeToRefs(useUserStore())
+
+  onMounted(() => {
+    getFirebaseUsers()
+  });
+
+  const getFirebaseUsers = () => {
+    const db = getDatabase();
+    const usersResult = query(fbRef(db, 'authentication/users'))
+    console.log(usersResult)
+    // const resp = getAuth()
+    // console.log(resp)
+  }
+
 
 </script>
 

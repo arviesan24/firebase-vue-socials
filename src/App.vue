@@ -2,7 +2,8 @@
   <main>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <router-link class="navbar-brand" to="/">Socials</router-link>
+        <router-link class="navbar-brand" to="/" v-if="!isLoggedIn">Socials</router-link>
+        <router-link class="navbar-brand" to="/feed" v-if="isLoggedIn">Socials</router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,8 +18,14 @@
           </ul>
           <div class="container-fluid m-1" v-if="isLoggedIn">
             <div class="input-group">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-warning" type="submit">Search</button>
+              <input
+                v-model="userStore.emailSearch"
+                class="form-control"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              >
+              <button @click="searchUser()" class="btn btn-outline-warning">Search</button>
             </div>
           </div>
           <div class="d-flex">
@@ -46,10 +53,12 @@
   import { RouterLink, RouterView, useRouter } from 'vue-router';
   import { onMounted, ref } from 'vue';
   import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth';
+  import { useUserStore } from './stores/user'
   import ButtonWarning from './components/ButtonWarning.vue';
 
   const isLoggedIn = ref(false)
   const router = useRouter()
+  const userStore = useUserStore()
 
   let auth;
   onMounted(() => {
@@ -68,4 +77,10 @@
       router.push("/")
     })
   }
+
+  const searchUser = () => {
+    router.push("/search-result")
+  }
+
+  
 </script>
