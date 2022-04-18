@@ -6,6 +6,7 @@ import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import Register from '../views/Register.vue'
 import SearchResults from '../views/SearchResults.vue'
+import UpdateProfile from '../views/UpdateProfile.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,14 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: Profile,
+      meta: {
+        requiresAuth: true,
+      }
+    },
+    {
+      path: '/profile/edit',
+      name: 'updateProfile',
+      component: UpdateProfile,
       meta: {
         requiresAuth: true,
       }

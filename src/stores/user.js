@@ -4,11 +4,19 @@ export const useUserStore = defineStore({
   id: 'user',
   state: () => ({
     emailSearch: '',
-    searchResults: []
+    searchResults: [],
+    fname: '',
+    lname: '',
+    profession: '',
+    aboutMe: ''
   }),
   getters: {
     getemailSearch: (state) => state.emailSearch,
-    getSearcResults: (state) => state.searchResults
+    getSearcResults: (state) => state.searchResults,
+    getFname: (state) => state.fname,
+    getLname: (state) => state.lname,
+    getProfession: (state) => state.profession,
+    getAboutMe: (state) => state.aboutMe,
   },
   actions: {
     updateSearchResults(values) {

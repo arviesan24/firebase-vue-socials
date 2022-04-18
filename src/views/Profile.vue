@@ -4,7 +4,7 @@
     <div class="col-md-7">
       <div class="card p-3 py-4">
         <div>
-          <button class="btn btn-sm float-end"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          <router-link to="/profile/edit" class="btn btn-sm float-end"><i class="fa fa-pencil" aria-hidden="true"></i></router-link>
         </div>
         <div class="text-center"> <img src="https://i.imgur.com/bDLhJiP.jpg" width="100" class="rounded-circle"> </div>
         <div class="text-center mt-3"> <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span>
@@ -27,7 +27,9 @@
 </div>
 </template>
 
-
+<script setup>
+import { RouterLink } from 'vue-router';
+</script>
 
 
 <style scoped>
