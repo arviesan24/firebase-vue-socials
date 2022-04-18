@@ -8,9 +8,9 @@
         </div>
         <div class="text-center"> <img src="https://i.imgur.com/bDLhJiP.jpg" width="100" class="rounded-circle"> </div>
         <div class="text-center mt-3"> <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span>
-          <h5 class="mt-2 mb-0">Alexender Schidmt</h5> <span>UI/UX Designer</span>
+          <h5 class="mt-2 mb-0">{{ userStore.getFname }} {{ userStore.getLname }}</h5> <span>{{ userStore.getProfession }}</span>
           <div class="px-4 mt-1">
-            <p class="fonts">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+            <p class="fonts">{{ userStore.getAboutMe }}</p>
           </div>
           <ul class="social-list">
             <li><i class="fa fa-facebook"></i></li>
@@ -28,7 +28,34 @@
 </template>
 
 <script setup>
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref as fbRef, onValue } from "firebase/database";
+import { onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
+import { useUserStore } from '../stores/user';
+
+const userStore = useUserStore();
+
+onMounted(() => {
+  getProfileInfo()
+})
+
+const getProfileInfo = () => {
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const db = getDatabase();
+      const profileRef = fbRef(db, 'profiles/' + user.uid);
+      onValue(profileRef, (snapshot) => {
+        const data = snapshot.val();
+        userStore.updateFname(data.fname)
+        userStore.updateLname(data.lname)
+        userStore.updateProfession(data.profession)
+        userStore.updateAboutMe(data.aboutMe)
+      })
+    }
+  })
+}
 </script>
 
 
