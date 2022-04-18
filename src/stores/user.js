@@ -24,6 +24,18 @@ export const useUserStore = defineStore({
     },
     updateEmailSearch(value) {
       this.searchResults = value
+    },
+    updateFname(val) {
+      this.fname = val
+    },
+    updateLname(val) {
+      this.lname = val
+    },
+    updateProfession(val) {
+      this.profession = val
+    },
+    updateAboutMe(val) {
+      this.aboutMe = val
     }
   }
 })
