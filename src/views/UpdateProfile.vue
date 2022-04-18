@@ -4,23 +4,23 @@
       <div class="card-body">
         <InputText
           label="First Name"
-          :modelValue="userStore.fname"
-          @update:modelValue="userStore.fname = $event"
+          :modelValue="firstName"
+          @update:modelValue="firstName = $event"
         />
         <InputText
           label="Last Name"
-          :modelValue="userStore.lname"
-          @update:modelValue="userStore.lname = $event"
+          :modelValue="lastName"
+          @update:modelValue="lastName = $event"
         />
         <InputText
           label="Profession"
-          :modelValue="userStore.profession"
-          @update:modelValue="userStore.profession = $event"
+          :modelValue="profession"
+          @update:modelValue="profession = $event"
         />
         <TextArea
           label="Tell us about yourself"
-          :modelValue="userStore.aboutMe"
-          @update:modelValue="userStore.aboutMe = $event"
+          :modelValue="aboutMe"
+          @update:modelValue="aboutMe = $event"
         ></TextArea>
         <div class="alert alert-danger" role="alert" v-if="errMsg">
           {{ errMsg }}
@@ -47,22 +47,31 @@
   const router = useRouter();
 
   const errMsg = ref();
-  const firstName = ref();
+  const firstName = ref(userStore.fname);
+  const lastName = ref(userStore.lname);
+  const profession = ref(userStore.profession);
+  const aboutMe = ref(userStore.aboutMe);
 
   const save = () => {
-    const auth = getAuth();
+    const auth = getAuth()
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const db = getDatabase();
+        const db = getDatabase()
         const payload = {
           userId: user.uid,
-          fname: userStore.fname,
-          lname: userStore.lname,
-          profession: userStore.profession,
-          aboutMe: userStore.aboutMe
+          fname: firstName.value,
+          lname: lastName.value,
+          profession: profession.value,
+          aboutMe: aboutMe.value
         }
-        const reference = fbRef(db, 'profiles/' + user.uid);
-        set(reference, payload);
+        const reference = fbRef(db, 'profiles/' + user.uid)
+        set(reference, payload)
+
+        userStore.updateFname(firstName.value)
+        userStore.updateLname(lastName.value)
+        userStore.updateProfession(profession.value)
+        userStore.updateAboutMe(aboutMe.value)
+
         router.push('/profile')
       } else {
         errMsg.value = "No user logged in."
