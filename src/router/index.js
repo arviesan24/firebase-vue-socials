@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import Home from '../views/Home.vue'
 import Feed from '../views/Feed.vue'
 import Login from '../views/Login.vue'
+import Profile from '../views/Profile.vue'
 import Register from '../views/Register.vue'
 
 const router = createRouter({
@@ -22,6 +23,14 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: '/feed',
